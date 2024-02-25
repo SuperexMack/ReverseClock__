@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stopwatch</title>
+<style>
+    #stopwatch {
+        font-size: 24px;
+        font-family: Arial, sans-serif;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+<div id="stopwatch">00:00:00</div>
+<button onclick="startStopwatch()">Start</button>
+<!-- <button onclick="stopStopwatch()">Stop</button> -->
+<!-- <button onclick="resetStopwatch()">Reset</button> -->
+
+<script>
+
+let hours = prompt("add the value of hour");
+hours = parseInt(hours)
+let minutes = prompt("add the value of minute")
+minutes = parseInt(minutes)
+let seconds = prompt("add the value of seconds")
+seconds = parseInt(seconds)
+
+
+let interval;
+
+function startStopwatch() {
+    interval = setInterval(updateStopwatch, 1000);
+}
+
+function stopStopwatch() {
+    clearInterval(interval);
+}
+
+function resetStopwatch() {
+    clearInterval(interval);
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+    document.getElementById('stopwatch').innerText = '00:00:00';
+}
+
+function updateStopwatch() {
+    if(seconds > 0) seconds--;
+
+    if (seconds == 0) {
+        seconds = 59;
+        if(minutes>0)  minutes--;
+       
+        if (minutes == 0) {
+            minutes = 59;
+            hours--;
+        }
+    }
+    document.getElementById('stopwatch').innerText = 
+        (hours < 10 ? '0' + hours : hours) + ':' + 
+        (minutes < 10 ? '0' + minutes : minutes) + ':' + 
+        (seconds < 10 ? '0' + seconds : seconds);
+}
+</script>
+</body>
+</html>
